@@ -3,28 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <title>DuckAI 🦆 - The Future of Memecoins on Solana</title>
+    <!-- Meta Tags -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta description="DuckAI - Revolutionizing the memecoin space on Solana with advanced AI technology.">
     <!-- Link to the CSS file -->
     <link rel="stylesheet" href="styles.css">
     <!-- Include Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Roboto+Mono&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <!-- Favicon -->
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <!-- AOS Library for Animations -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
-    <!-- Chart.js Library -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- Three.js Library for 3D Models -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <!-- Include the JavaScript file -->
-    <script defer src="script.js"></script>
 </head>
 <body>
     <!-- Navigation Bar -->
     <nav>
         <div class="logo">
-            <img src="images/duckai_logo.png" alt="DuckAI Logo">
+            <img src="duckai_logo.png" alt="DuckAI Logo">
             <h1>DuckAI</h1>
         </div>
         <ul class="nav-links">
@@ -35,19 +32,14 @@
             <li><a href="#community">Community</a></li>
         </ul>
         <button id="connect-wallet">Connect Wallet</button>
-        <div class="burger">
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
     </nav>
 
     <!-- Hero Section -->
     <section id="hero">
         <canvas id="hero-canvas"></canvas>
         <div class="hero-content">
-            <h2>Welcome to DuckAI</h2>
-            <h3>The Ultimate Memecoin on Solana</h3>
+            <h2>Welcome to the Future of Memecoins</h2>
+            <h3>Powered by AI on Solana Blockchain</h3>
             <button id="buy-now">Buy $DUCKY Now</button>
         </div>
     </section>
@@ -59,17 +51,17 @@
             <p>DuckAI is revolutionizing the memecoin space on Solana by integrating advanced AI technology with the power of blockchain. Our mission is to create a community-driven token that not only brings fun and memes but also real utility and innovation.</p>
             <div class="features">
                 <div class="feature">
-                    <img src="images/ai_icon.png" alt="AI Integration">
+                    <img src="ai_icon.png" alt="AI Integration">
                     <h3>AI Integration</h3>
                     <p>Leveraging machine learning to analyze market trends and provide insights.</p>
                 </div>
                 <div class="feature">
-                    <img src="images/solana_icon.png" alt="Solana Blockchain">
+                    <img src="solana_icon.png" alt="Solana Blockchain">
                     <h3>Solana Blockchain</h3>
                     <p>Fast, secure, and scalable blockchain technology for seamless transactions.</p>
                 </div>
                 <div class="feature">
-                    <img src="images/community_icon.png" alt="Community Driven">
+                    <img src="community_icon.png" alt="Community Driven">
                     <h3>Community Driven</h3>
                     <p>A strong, vibrant community at the heart of our success.</p>
                 </div>
@@ -149,22 +141,10 @@
             <h2>Join the DuckAI Community</h2>
             <p>Stay updated and connect with fellow DuckAI enthusiasts.</p>
             <div class="social-links">
-                <a href="https://twitter.com/duckai" target="_blank"><img src="images/twitter_icon.png" alt="Twitter"></a>
-                <a href="https://t.me/duckai" target="_blank"><img src="images/telegram_icon.png" alt="Telegram"></a>
-                <a href="https://discord.gg/duckai" target="_blank"><img src="images/discord_icon.png" alt="Discord"></a>
-                <a href="https://medium.com/@duckai" target="_blank"><img src="images/medium_icon.png" alt="Medium"></a>
-            </div>
-        </div>
-    </section>
-
-    <!-- AI Chatbot Section -->
-    <section id="ai-chatbot">
-        <div class="container" data-aos="fade-up">
-            <h2>DuckAI Chatbot</h2>
-            <div id="chatbot-container">
-                <div id="chatbot-messages"></div>
-                <input type="text" id="chatbot-input" placeholder="Type your message...">
-                <button id="chatbot-send">Send</button>
+                <a href="https://twitter.com/duckai" target="_blank"><img src="twitter_icon.png" alt="Twitter"></a>
+                <a href="https://t.me/duckai" target="_blank"><img src="telegram_icon.png" alt="Telegram"></a>
+                <a href="https://discord.gg/duckai" target="_blank"><img src="discord_icon.png" alt="Discord"></a>
+                <a href="https://medium.com/@duckai" target="_blank"><img src="medium_icon.png" alt="Medium"></a>
             </div>
         </div>
     </section>
@@ -179,5 +159,13 @@
 
     <!-- AOS Library JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <!-- Chart.js Library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Solana Wallet Adapter -->
+    <script src="https://unpkg.com/@solana/wallet-adapter-wallets/dist/umd/index.iife.js"></script>
+    <script src="https://unpkg.com/@solana/wallet-adapter-base/dist/umd/index.iife.js"></script>
+    <script src="https://unpkg.com/@solana/wallet-adapter-react-ui/dist/umd/index.iife.js"></script>
+    <!-- Include the JavaScript file -->
+    <script src="script.js"></script>
 </body>
 </html>
