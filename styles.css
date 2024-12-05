@@ -1,0 +1,418 @@
+/* General Styles */
+body, html {
+    margin: 0;
+    padding: 0;
+    background-color: #0e0e0e;
+    color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+    overflow-x: hidden;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Navigation Bar */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background-color: #151515;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 100;
+}
+
+nav .logo {
+    display: flex;
+    align-items: center;
+}
+
+nav .logo img {
+    width: 50px;
+    margin-right: 10px;
+}
+
+nav h1 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 2em;
+    color: #ffcc00;
+}
+
+nav .nav-links {
+    display: flex;
+    align-items: center;
+    list-style: none;
+}
+
+nav .nav-links li {
+    margin: 0 15px;
+}
+
+nav .nav-links a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s;
+}
+
+nav .nav-links a:hover {
+    color: #ffcc00;
+}
+
+#connect-wallet {
+    padding: 10px 20px;
+    background-color: #ffcc00;
+    border: none;
+    border-radius: 25px;
+    color: #000000;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#connect-wallet:hover {
+    background-color: #e6b800;
+}
+
+/* Burger Menu */
+.burger {
+    display: none;
+    cursor: pointer;
+}
+
+.burger div {
+    width: 25px;
+    height: 3px;
+    background-color: #ffffff;
+    margin: 5px;
+    transition: all 0.3s ease;
+}
+
+/* Hero Section */
+#hero {
+    position: relative;
+    height: 100vh;
+    background: linear-gradient(to bottom, #0e0e0e, #151515);
+}
+
+#hero-canvas {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.hero-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #ffffff;
+}
+
+.hero-content h2 {
+    font-size: 3em;
+    margin-bottom: 20px;
+}
+
+.hero-content h3 {
+    font-size: 1.5em;
+    margin-bottom: 40px;
+    color: #ffcc00;
+}
+
+#buy-now {
+    padding: 15px 30px;
+    background-color: #ffcc00;
+    border: none;
+    border-radius: 30px;
+    color: #000000;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#buy-now:hover {
+    background-color: #e6b800;
+}
+
+/* Sections */
+section {
+    padding: 100px 20px;
+    background-color: #0e0e0e;
+}
+
+section:nth-child(even) {
+    background-color: #151515;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+h2 {
+    font-size: 2.5em;
+    margin-bottom: 40px;
+    color: #ffcc00;
+}
+
+p {
+    font-size: 1.1em;
+    line-height: 1.6;
+    color: #dddddd;
+}
+
+/* Features */
+.features {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.feature {
+    width: 300px;
+    margin: 20px;
+    text-align: center;
+}
+
+.feature img {
+    width: 80px;
+    margin-bottom: 20px;
+}
+
+.feature h3 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    color: #ffffff;
+}
+
+.feature p {
+    color: #bbbbbb;
+}
+
+/* Tokenomics */
+.tokenomics-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.token-distribution {
+    width: 500px;
+    margin: 20px;
+}
+
+.token-details {
+    width: 400px;
+    margin: 20px;
+}
+
+.token-details ul {
+    list-style: none;
+    padding: 0;
+}
+
+.token-details li {
+    font-size: 1.1em;
+    margin: 10px 0;
+    color: #ffffff;
+}
+
+.token-details strong {
+    color: #ffcc00;
+}
+
+/* Roadmap */
+.timeline {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.timeline-item {
+    width: 80%;
+    padding: 20px;
+    margin: 20px 0;
+    background-color: #1f1f1f;
+    border-radius: 10px;
+}
+
+.timeline-item h3 {
+    font-size: 1.8em;
+    margin-bottom: 10px;
+    color: #ffffff;
+}
+
+.timeline-item p {
+    color: #bbbbbb;
+}
+
+/* How to Buy */
+#how-to-buy ol {
+    list-style: decimal;
+    text-align: left;
+    max-width: 800px;
+    margin: 0 auto 40px auto;
+}
+
+#how-to-buy li {
+    font-size: 1.2em;
+    margin: 20px 0;
+    color: #ffffff;
+}
+
+#how-to-buy strong {
+    color: #ffcc00;
+}
+
+#buy-now-2 {
+    padding: 15px 30px;
+    background-color: #ffcc00;
+    border: none;
+    border-radius: 30px;
+    color: #000000;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#buy-now-2:hover {
+    background-color: #e6b800;
+}
+
+/* Community */
+.social-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.social-links a {
+    margin: 10px;
+}
+
+.social-links img {
+    width: 50px;
+    transition: transform 0.3s;
+}
+
+.social-links img:hover {
+    transform: scale(1.1);
+}
+
+/* AI Chatbot */
+#ai-chatbot {
+    background-color: #151515;
+}
+
+#chatbot-container {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+#chatbot-messages {
+    height: 300px;
+    background-color: #1f1f1f;
+    padding: 20px;
+    overflow-y: auto;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+#chatbot-messages .message {
+    margin-bottom: 15px;
+}
+
+#chatbot-messages .message strong {
+    color: #ffcc00;
+}
+
+#chatbot-input {
+    width: calc(100% - 100px);
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #ffcc00;
+    border-radius: 5px;
+    background-color: #1f1f1f;
+    color: #ffffff;
+    outline: none;
+}
+
+#chatbot-send {
+    padding: 10px 20px;
+    background-color: #ffcc00;
+    border: none;
+    margin-left: 10px;
+    border-radius: 5px;
+    color: #000000;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#chatbot-send:hover {
+    background-color: #e6b800;
+}
+
+/* Footer */
+footer {
+    background-color: #151515;
+    padding: 20px;
+    text-align: center;
+}
+
+footer p {
+    margin: 5px 0;
+    color: #bbbbbb;
+}
+
+footer a {
+    color: #ffcc00;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    nav .nav-links {
+        display: none;
+    }
+
+    .burger {
+        display: block;
+    }
+
+    nav .logo h1 {
+        font-size: 1.5em;
+    }
+
+    #connect-wallet {
+        display: none;
+    }
+
+    .features, .tokenomics-content, .timeline {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .feature, .token-distribution, .token-details, .timeline-item {
+        width: 90%;
+    }
+
+    #chatbot-input {
+        width: calc(100% - 90px);
+    }
+}
