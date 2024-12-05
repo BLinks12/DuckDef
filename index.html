@@ -2,23 +2,33 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>DuckAI 🦆 - Quacktastic PumpFun Crypto Analyzer</title>
+    <title>DonaldAI 🦆 - Quacktastic PumpFun Crypto Analyzer</title>
     <!-- Link to the CSS file -->
     <link rel="stylesheet" href="styles.css">
     <!-- Include Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Roboto+Mono&display=swap" rel="stylesheet">
+    <!-- Include Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Include Particles.js CDN for animated background -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 </head>
 <body>
-    <!-- DuckAI Header -->
+    <!-- Animated Particle Background -->
+    <div id="particles-js"></div>
+
+    <!-- DonaldAI Header -->
     <header>
-        <img src="duckai_logo.png" alt="DuckAI Logo" id="logo">
-        <h1>DuckAI</h1>
+        <!-- Replace 'donaldai_logo.png' with your actual logo image -->
+        <img src="donaldai_logo.png" alt="DonaldAI Logo" id="logo">
+        <h1>DonaldAI 🦆</h1>
         <h2>Quacktastic PumpFun Crypto Analyzer</h2>
     </header>
 
     <!-- Main Content -->
     <main>
-        <p>Welcome to DuckAI's pond! Dive in and let our feathered AI friend waddle through the complexities of PumpFun crypto projects for you.</p>
+        <section id="introduction">
+            <p>Welcome to DonaldAI's pond! Dive in and let our feathered AI friend waddle through the complexities of PumpFun crypto projects for you.</p>
+        </section>
 
         <!-- Form to submit PumpFun link -->
         <form id="link-form">
@@ -26,30 +36,54 @@
             <button type="submit">Let’s Quack It!</button>
         </form>
 
+        <!-- Error Message -->
+        <div id="error-message" class="hidden"></div>
+
         <!-- Visualization Container -->
         <div id="visualization-container" class="hidden">
             <canvas id="neural-network-canvas"></canvas>
             <div id="progress-bar-container">
                 <div id="progress-bar"></div>
+                <div id="progress-steps">
+                    <span class="step active">Connecting</span>
+                    <span class="step">Analyzing</span>
+                    <span class="step">Reporting</span>
+                </div>
             </div>
         </div>
 
         <!-- Console Output -->
         <div id="console-output"></div>
 
+        <!-- Analysis Report with Charts -->
+        <div id="analysis-report" class="hidden">
+            <h3>🦆 DonaldAI's Detailed Analysis Report 🦆</h3>
+            <pre id="analysis-text"></pre>
+            <canvas id="roi-chart"></canvas>
+            <canvas id="risk-chart"></canvas>
+        </div>
+
         <!-- Download Button (Created dynamically) -->
         <div id="download-container"></div>
 
-        <!-- Chatbot Container -->
-        <div id="chatbot-container" class="hidden">
-            <div id="chatbot-messages"></div>
-            <input type="text" id="chatbot-input" placeholder="Ask DuckAI anything...">
-        </div>
+        <!-- AI Explanation Section -->
+        <section id="ai-explanation">
+            <h2>How DonaldAI Works</h2>
+            <p>DonaldAI leverages advanced artificial intelligence and machine learning algorithms to analyze PumpFun crypto projects. Here's a glimpse into our quacktastic process:</p>
+            <ul>
+                <li><strong>Data Collection:</strong> DonaldAI gathers extensive data from PumpFun links, including transaction histories, market trends, and community engagement.</li>
+                <li><strong>Data Processing:</strong> The collected data is cleaned and structured, ensuring accuracy and relevance for analysis.</li>
+                <li><strong>Machine Learning:</strong> Utilizing neural networks, DonaldAI identifies patterns and correlations within the data to assess project viability.</li>
+                <li><strong>Predictive Modeling:</strong> DonaldAI forecasts potential returns on investment (ROI) and evaluates risk factors associated with each project.</li>
+                <li><strong>Report Generation:</strong> Based on the analysis, DonaldAI compiles comprehensive reports with actionable recommendations.</li>
+            </ul>
+            <p>With DonaldAI by your side, navigating the crypto pond has never been easier or more insightful!</p>
+        </section>
     </main>
 
     <!-- Footer -->
     <footer>
-        <p>© 2023 DuckAI. Making waves in the crypto pond!</p>
+        <p>© 2023 DonaldAI. Making waves in the crypto pond!</p>
     </footer>
 
     <!-- Include the JavaScript file -->
