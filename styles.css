@@ -2,7 +2,7 @@
 body, html {
     margin: 0;
     padding: 0;
-    background: linear-gradient(to bottom, #a8e6ff, #ffffff);
+    background: #ffffff;
     color: #333333;
     font-family: 'Roboto Mono', monospace;
     overflow-x: hidden;
@@ -11,12 +11,24 @@ body, html {
     flex-direction: column;
 }
 
+/* Animated Particle Background */
+#particles-js {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    background-color: #a8e6ff;
+}
+
 /* Header */
 header {
-    background-color: #ffeb3b;
+    background-color: rgba(255, 235, 59, 0.9);
     padding: 20px;
     text-align: center;
     position: relative;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 #logo {
@@ -46,15 +58,21 @@ main {
     text-align: center;
 }
 
-main p {
+main section {
+    margin-bottom: 30px;
+}
+
+#introduction p {
     font-size: 1.2em;
     margin-bottom: 30px;
 }
 
+/* Form Styles */
 #link-form {
     display: flex;
     justify-content: center;
     margin-bottom: 30px;
+    flex-wrap: wrap;
 }
 
 #pumpfun-link {
@@ -64,6 +82,11 @@ main p {
     border: 2px solid #ff9800;
     border-radius: 30px 0 0 30px;
     outline: none;
+    transition: border-color 0.3s;
+}
+
+#pumpfun-link:focus {
+    border-color: #e68900;
 }
 
 #link-form button {
@@ -75,12 +98,20 @@ main p {
     cursor: pointer;
     color: #ffffff;
     font-weight: bold;
-    transition: background-color 0.3s, box-shadow 0.3s;
+    transition: background-color 0.3s, box-shadow 0.3s, border-color 0.3s;
 }
 
 #link-form button:hover {
     background-color: #e68900;
     box-shadow: 0 0 10px #ff9800;
+    border-color: #e68900;
+}
+
+/* Error Message */
+#error-message {
+    color: #d32f2f;
+    font-size: 1em;
+    margin-bottom: 20px;
 }
 
 /* Visualization Container */
@@ -89,6 +120,9 @@ main p {
     width: 100%;
     height: 300px;
     margin-bottom: 30px;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .hidden {
@@ -113,6 +147,7 @@ main p {
     background: #b0bec5;
     border-radius: 10px;
     overflow: hidden;
+    padding: 5px;
 }
 
 #progress-bar {
@@ -120,6 +155,46 @@ main p {
     height: 20px;
     background: linear-gradient(to right, #ff9800, #ffeb3b);
     transition: width 0.2s;
+    border-radius: 5px;
+}
+
+/* Progress Steps */
+#progress-steps {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5px;
+}
+
+.step {
+    font-size: 0.8em;
+    color: #757575;
+    flex: 1;
+    text-align: center;
+    position: relative;
+}
+
+.step::after {
+    content: '';
+    position: absolute;
+    top: 10px;
+    right: -50%;
+    width: 100%;
+    height: 2px;
+    background: #b0bec5;
+    z-index: -1;
+}
+
+.step:last-child::after {
+    display: none;
+}
+
+.step.active {
+    color: #ff9800;
+    font-weight: bold;
+}
+
+.step.active::after {
+    background: #ff9800;
 }
 
 /* Console Output */
@@ -136,6 +211,40 @@ main p {
     margin-bottom: 30px;
     font-family: 'Roboto Mono', monospace;
     color: #333333;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    white-space: pre-wrap;
+}
+
+/* Analysis Report */
+#analysis-report {
+    background: #ffffff;
+    padding: 20px;
+    border: 2px solid #ff9800;
+    border-radius: 15px;
+    max-width: 800px;
+    margin: 0 auto 30px auto;
+    text-align: left;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#analysis-report h3 {
+    font-family: 'Fredoka One', cursive;
+    color: #ff9800;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+#analysis-report pre {
+    background: #f5f5f5;
+    padding: 15px;
+    border-radius: 10px;
+    overflow-x: auto;
+    font-family: 'Roboto Mono', monospace;
+    color: #333333;
+}
+
+#analysis-report canvas {
+    margin-top: 20px;
 }
 
 /* Download Button */
@@ -149,6 +258,8 @@ main p {
     font-weight: bold;
     border-radius: 30px;
     transition: background-color 0.3s, box-shadow 0.3s;
+    display: block;
+    margin: 0 auto;
 }
 
 #download-btn:hover {
@@ -156,42 +267,40 @@ main p {
     box-shadow: 0 0 10px #ff9800;
 }
 
-/* Chatbot Styles */
-#chatbot-container {
-    background: #ffffff;
-    border: 2px solid #ff9800;
-    border-radius: 15px;
+/* AI Explanation Section */
+#ai-explanation {
+    background: rgba(255, 255, 255, 0.8);
     padding: 20px;
+    border-radius: 15px;
     max-width: 800px;
     margin: 0 auto 30px auto;
-    font-family: 'Roboto Mono', monospace;
-}
-
-#chatbot-messages {
-    max-height: 200px;
-    overflow-y: auto;
     text-align: left;
-    margin-bottom: 10px;
-    color: #333333;
 }
 
-#chatbot-input {
-    width: calc(100% - 20px);
-    padding: 10px;
-    font-size: 1em;
-    border: 2px solid #ff9800;
-    border-radius: 30px;
-    outline: none;
-    font-family: 'Roboto Mono', monospace;
+#ai-explanation h2 {
+    font-family: 'Fredoka One', cursive;
+    color: #ff9800;
+    margin-bottom: 15px;
+}
+
+#ai-explanation ul {
+    list-style-type: disc;
+    padding-left: 20px;
+    text-align: left;
+}
+
+#ai-explanation li {
+    margin-bottom: 10px;
 }
 
 /* Footer */
 footer {
-    background-color: #ffeb3b;
+    background-color: rgba(255, 235, 59, 0.9);
     padding: 10px;
     text-align: center;
     font-size: 0.9em;
     color: #757575;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
 }
 
 /* Responsive Design */
@@ -210,5 +319,17 @@ footer {
     #link-form button {
         border-radius: 30px;
         margin-left: 0;
+    }
+
+    #ai-explanation {
+        padding: 15px;
+    }
+
+    #visualization-container {
+        height: 200px;
+    }
+
+    #console-output {
+        max-height: 150px;
     }
 }
