@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DuckAI 🦆 - The Future of Memecoins on Solana</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta description="DuckAI - Revolutionizing the memecoin space on Solana with advanced AI technology.">
+    <!-- Link to the CSS file -->
+    <link rel="stylesheet" href="styles.css">
+    <!-- Include Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <!-- AOS Library for Animations -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <!-- Chart.js Library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Three.js Library for 3D Models -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- Include the JavaScript file -->
+    <script defer src="script.js"></script>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="logo">
+            <img src="images/duckai_logo.png" alt="DuckAI Logo">
+            <h1>DuckAI</h1>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#tokenomics">Tokenomics</a></li>
+            <li><a href="#roadmap">Roadmap</a></li>
+            <li><a href="#how-to-buy">How to Buy</a></li>
+            <li><a href="#community">Community</a></li>
+        </ul>
+        <button id="connect-wallet">Connect Wallet</button>
+        <div class="burger">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero">
+        <canvas id="hero-canvas"></canvas>
+        <div class="hero-content">
+            <h2>Welcome to DuckAI</h2>
+            <h3>The Ultimate Memecoin on Solana</h3>
+            <button id="buy-now">Buy $DUCKY Now</button>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container" data-aos="fade-up">
+            <h2>About DuckAI</h2>
+            <p>DuckAI is revolutionizing the memecoin space on Solana by integrating advanced AI technology with the power of blockchain. Our mission is to create a community-driven token that not only brings fun and memes but also real utility and innovation.</p>
+            <div class="features">
+                <div class="feature">
+                    <img src="images/ai_icon.png" alt="AI Integration">
+                    <h3>AI Integration</h3>
+                    <p>Leveraging machine learning to analyze market trends and provide insights.</p>
+                </div>
+                <div class="feature">
+                    <img src="images/solana_icon.png" alt="Solana Blockchain">
+                    <h3>Solana Blockchain</h3>
+                    <p>Fast, secure, and scalable blockchain technology for seamless transactions.</p>
+                </div>
+                <div class="feature">
+                    <img src="images/community_icon.png" alt="Community Driven">
+                    <h3>Community Driven</h3>
+                    <p>A strong, vibrant community at the heart of our success.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tokenomics Section -->
+    <section id="tokenomics">
+        <div class="container" data-aos="fade-up">
+            <h2>Tokenomics</h2>
+            <div class="tokenomics-content">
+                <div class="token-distribution">
+                    <h3>Token Distribution</h3>
+                    <canvas id="tokenomics-chart"></canvas>
+                </div>
+                <div class="token-details">
+                    <ul>
+                        <li><strong>Total Supply:</strong> 1,000,000,000 $DUCKY</li>
+                        <li><strong>Liquidity Pool:</strong> 50%</li>
+                        <li><strong>Marketing:</strong> 20%</li>
+                        <li><strong>Development:</strong> 15%</li>
+                        <li><strong>Community Rewards:</strong> 10%</li>
+                        <li><strong>Team:</strong> 5%</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Roadmap Section -->
+    <section id="roadmap">
+        <div class="container" data-aos="fade-up">
+            <h2>Roadmap</h2>
+            <div class="timeline">
+                <div class="timeline-item" data-aos="fade-right">
+                    <h3>Q1 2023</h3>
+                    <p>Project Conceptualization, Team Formation, Initial Development</p>
+                </div>
+                <div class="timeline-item" data-aos="fade-left">
+                    <h3>Q2 2023</h3>
+                    <p>Website Launch, Smart Contract Deployment, Initial Token Offering</p>
+                </div>
+                <div class="timeline-item" data-aos="fade-right">
+                    <h3>Q3 2023</h3>
+                    <p>Community Building, Marketing Campaigns, CEX Listings</p>
+                </div>
+                <div class="timeline-item" data-aos="fade-left">
+                    <h3>Q4 2023</h3>
+                    <p>AI Integration, DuckAI DApp Release, Partnerships</p>
+                </div>
+                <div class="timeline-item" data-aos="fade-right">
+                    <h3>Q1 2024</h3>
+                    <p>NFT Marketplace Launch, Expansion into DeFi, Global Outreach</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How to Buy Section -->
+    <section id="how-to-buy">
+        <div class="container" data-aos="fade-up">
+            <h2>How to Buy $DUCKY</h2>
+            <ol>
+                <li><strong>Step 1:</strong> Set up a Solana-compatible wallet (e.g., Phantom).</li>
+                <li><strong>Step 2:</strong> Add Solana (SOL) to your wallet.</li>
+                <li><strong>Step 3:</strong> Connect your wallet using the "Connect Wallet" button.</li>
+                <li><strong>Step 4:</strong> Click "Buy $DUCKY Now" to purchase tokens.</li>
+            </ol>
+            <button id="buy-now-2">Buy $DUCKY Now</button>
+        </div>
+    </section>
+
+    <!-- Community Section -->
+    <section id="community">
+        <div class="container" data-aos="fade-up">
+            <h2>Join the DuckAI Community</h2>
+            <p>Stay updated and connect with fellow DuckAI enthusiasts.</p>
+            <div class="social-links">
+                <a href="https://twitter.com/duckai" target="_blank"><img src="images/twitter_icon.png" alt="Twitter"></a>
+                <a href="https://t.me/duckai" target="_blank"><img src="images/telegram_icon.png" alt="Telegram"></a>
+                <a href="https://discord.gg/duckai" target="_blank"><img src="images/discord_icon.png" alt="Discord"></a>
+                <a href="https://medium.com/@duckai" target="_blank"><img src="images/medium_icon.png" alt="Medium"></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Chatbot Section -->
+    <section id="ai-chatbot">
+        <div class="container" data-aos="fade-up">
+            <h2>DuckAI Chatbot</h2>
+            <div id="chatbot-container">
+                <div id="chatbot-messages"></div>
+                <input type="text" id="chatbot-input" placeholder="Type your message...">
+                <button id="chatbot-send">Send</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>© 2023 DuckAI. All rights reserved.</p>
+            <p><a href="#privacy-policy">Privacy Policy</a> | <a href="#terms-of-service">Terms of Service</a></p>
+        </div>
+    </footer>
+
+    <!-- AOS Library JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+</body>
+</html>
