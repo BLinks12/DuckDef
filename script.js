@@ -1,207 +1,268 @@
-// Initialize AOS Library
-AOS.init();
-
 // ====================================
-// 1. Three.js Hero Background Animation
+// 1. PumpFun Crypto Analyzer with Ducky Enhancements
 // ====================================
 
-const canvas = document.getElementById('hero-canvas');
-const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
-renderer.setSize(window.innerWidth, window.innerHeight);
-renderer.setPixelRatio(window.devicePixelRatio);
+// Elements
+const linkForm = document.getElementById('link-form');
+const pumpfunLinkInput = document.getElementById('pumpfun-link');
+const consoleOutput = document.getElementById('console-output');
+const visualizationContainer = document.getElementById('visualization-container');
+const neuralCanvas = document.getElementById('neural-network-canvas');
+const progressBar = document.getElementById('progress-bar');
+const chatbotContainer = document.getElementById('chatbot-container');
+const downloadContainer = document.getElementById('download-container');
 
-// Create Scene and Camera
-const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-camera.position.z = 50;
+// Ducky Analysis Template
+function createDetailedAnalysis() {
+    const riskScore = (Math.random() * 100).toFixed(2);
+    const predictedROI = (Math.random() * 200 - 50).toFixed(2);
+    const confidenceInterval = (Math.random() * 10 + 90).toFixed(2);
 
-// Add Lights
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
-scene.add(ambientLight);
-const pointLight = new THREE.PointLight(0xffcc00, 1);
-pointLight.position.set(50, 50, 50);
-scene.add(pointLight);
+    return `
+🦆 DuckAI's Quacktastic Analysis Report 🦆
 
-// Create Particles
-const particlesCount = 5000;
-const positions = new Float32Array(particlesCount * 3);
+🐤 Risk Score: ${riskScore}/100
+💰 Predicted ROI: ${predictedROI}%
+🔒 Confidence Level: ${confidenceInterval}%
 
-for (let i = 0; i < particlesCount * 3; i++) {
-    positions[i] = (Math.random() - 0.5) * 200;
+🦆 **Key Findings:**
+1. Market volatility is ${riskScore > 50 ? 'high 🌀' : 'low 🌊'}, affecting potential returns.
+2. Sentiment analysis indicates a ${predictedROI > 0 ? 'positive 📈' : 'negative 📉'} outlook.
+3. DuckAI's algorithms quack a ${confidenceInterval}% confidence in these results.
+
+🦆 **Recommendations:**
+${riskScore > 50 ? 'Proceed with caution. Swim carefully in these waters. 🦆' : 'The waters are calm. This could be a golden egg! 🥚'}
+
+*This report was lovingly crafted by DuckAI's AI feathers and webbed feet.*
+`;
 }
 
-const particlesGeometry = new THREE.BufferGeometry();
-particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-
-const particlesMaterial = new THREE.PointsMaterial({
-    color: 0xffcc00,
-    size: 1,
+// Event Listener for Form Submission
+linkForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const link = pumpfunLinkInput.value.trim();
+    if (link === '') {
+        alert('Please enter a PumpFun link.');
+        return;
+    }
+    startAnalysis(link);
 });
 
-const particles = new THREE.Points(particlesGeometry, particlesMaterial);
-scene.add(particles);
+// Start Analysis Function
+function startAnalysis(link) {
+    consoleOutput.innerHTML = '';
+    visualizationContainer.classList.remove('hidden');
+    animateNeuralNetwork();
+    animateProgressBar();
+    chatbotContainer.classList.add('hidden');
+    downloadContainer.innerHTML = ''; // Clear previous download button
 
-// Animation Loop
-function animate() {
-    requestAnimationFrame(animate);
-    particles.rotation.y += 0.0005;
-    renderer.render(scene, camera);
+    const loadingMessages = [
+        `🌐 Connecting to PumpFun pond...`,
+        `🦆 DuckAI is waddling through ${link}...`,
+        `🔍 Diving deep into the data lake...`,
+        `💡 Analyzing with AI quacks and neural networks...`,
+        `📝 Preparing your quacktastic report...`
+    ];
+
+    function displayNextMessage(i) {
+        if (i < loadingMessages.length) {
+            displayConsoleMessage(loadingMessages[i] + '\n', () => {
+                displayNextMessage(i + 1);
+            });
+        } else {
+            setTimeout(() => {
+                generateAnalysis();
+            }, 1000);
+        }
+    }
+
+    displayNextMessage(0);
 }
 
-animate();
+// Typing Effect for Console Messages
+function displayConsoleMessage(message, callback) {
+    let index = 0;
+    const interval = setInterval(() => {
+        consoleOutput.innerHTML += message.charAt(index);
+        consoleOutput.scrollTop = consoleOutput.scrollHeight;
+        index++;
+        if (index === message.length) {
+            clearInterval(interval);
+            if (callback) callback();
+        }
+    }, 50);
+}
 
-// Handle Window Resize
-window.addEventListener('resize', () => {
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-});
+// Generate Analysis Function
+function generateAnalysis() {
+    consoleOutput.innerHTML += '\n🦆 Analysis complete! 🦆\n';
+    const analysis = createDetailedAnalysis();
+    consoleOutput.innerHTML += analysis + '\n';
+
+    // Stop animations
+    stopNeuralNetworkAnimation();
+    stopProgressBar();
+
+    // Create a download button for the analysis
+    const downloadBtn = document.createElement('button');
+    downloadBtn.id = 'download-btn';
+    downloadBtn.textContent = 'Download Your Duckport';
+    downloadBtn.addEventListener('click', () => {
+        downloadAnalysis(analysis);
+    });
+    downloadContainer.appendChild(downloadBtn);
+
+    // Show chatbot
+    chatbotContainer.classList.remove('hidden');
+}
+
+// Download Analysis Function
+function downloadAnalysis(analysisText) {
+    const blob = new Blob([analysisText], { type: 'text/plain' });
+    const link = document.createElement('a');
+    link.download = 'DuckAI_Analysis.txt';
+    link.href = window.URL.createObjectURL(blob);
+    link.click();
+}
 
 // ====================================
-// 2. Tokenomics Chart
+// 2. Neural Network Animation
 // ====================================
 
-const ctx = document.getElementById('tokenomics-chart').getContext('2d');
-const tokenomicsChart = new Chart(ctx, {
-    type: 'doughnut',
-    data: {
-        labels: ['Liquidity Pool', 'Marketing', 'Development', 'Community Rewards', 'Team'],
-        datasets: [{
-            data: [50, 20, 15, 10, 5],
-            backgroundColor: [
-                '#ffcc00',
-                '#e6b800',
-                '#cccc00',
-                '#b3a800',
-                '#999900'
-            ],
-            borderColor: '#151515',
-            borderWidth: 2
-        }]
-    },
-    options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-            legend: {
-                labels: {
-                    color: '#ffffff',
-                    font: {
-                        size: 14
-                    }
+let neuralCtx = neuralCanvas.getContext('2d');
+let neuralWidth, neuralHeight;
+let nodes = [];
+let neuralAnimationFrame;
+
+function resizeNeuralCanvas() {
+    neuralWidth = neuralCanvas.width = neuralCanvas.clientWidth;
+    neuralHeight = neuralCanvas.height = neuralCanvas.clientHeight;
+}
+window.addEventListener('resize', resizeNeuralCanvas);
+resizeNeuralCanvas();
+
+function createNeuralNetworkNodes() {
+    nodes = [];
+    const nodeCount = 50;
+    for (let i = 0; i < nodeCount; i++) {
+        nodes.push({
+            x: Math.random() * neuralWidth,
+            y: Math.random() * neuralHeight,
+            vx: (Math.random() - 0.5) * 1,
+            vy: (Math.random() - 0.5) * 1,
+            size: Math.random() * 2 + 1
+        });
+    }
+}
+
+function animateNeuralNetwork() {
+    createNeuralNetworkNodes();
+    function drawNeuralNetwork() {
+        neuralCtx.clearRect(0, 0, neuralWidth, neuralHeight);
+        neuralCtx.fillStyle = '#ff9800';
+
+        nodes.forEach(node => {
+            node.x += node.vx;
+            node.y += node.vy;
+
+            // Wrap around edges
+            if (node.x < 0) node.x = neuralWidth;
+            if (node.x > neuralWidth) node.x = 0;
+            if (node.y < 0) node.y = neuralHeight;
+            if (node.y > neuralHeight) node.y = 0;
+
+            neuralCtx.beginPath();
+            neuralCtx.arc(node.x, node.y, node.size, 0, Math.PI * 2);
+            neuralCtx.fill();
+        });
+
+        // Draw connections
+        for (let i = 0; i < nodes.length; i++) {
+            for (let j = i + 1; j < nodes.length; j++) {
+                const dx = nodes[i].x - nodes[j].x;
+                const dy = nodes[i].y - nodes[j].y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                if (distance < 100) {
+                    neuralCtx.strokeStyle = `rgba(255, 152, 0, ${1 - distance / 100})`;
+                    neuralCtx.beginPath();
+                    neuralCtx.moveTo(nodes[i].x, nodes[i].y);
+                    neuralCtx.lineTo(nodes[j].x, nodes[j].y);
+                    neuralCtx.stroke();
                 }
             }
         }
+
+        neuralAnimationFrame = requestAnimationFrame(drawNeuralNetwork);
+    }
+    neuralAnimationFrame = requestAnimationFrame(drawNeuralNetwork);
+}
+
+function stopNeuralNetworkAnimation() {
+    cancelAnimationFrame(neuralAnimationFrame);
+}
+
+// ====================================
+// 3. Progress Bar Animation
+// ====================================
+
+let progress = 0;
+let progressInterval;
+
+function animateProgressBar() {
+    progress = 0;
+    progressBar.style.width = '0%';
+    progressInterval = setInterval(() => {
+        if (progress < 100) {
+            progress += Math.random() * 5;
+            progressBar.style.width = progress + '%';
+        } else {
+            clearInterval(progressInterval);
+        }
+    }, 200);
+}
+
+function stopProgressBar() {
+    clearInterval(progressInterval);
+    progressBar.style.width = '100%';
+}
+
+// ====================================
+// 4. Chatbot Functionality
+// ====================================
+
+const chatbotMessages = document.getElementById('chatbot-messages');
+const chatbotInput = document.getElementById('chatbot-input');
+
+chatbotInput.addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+        const userMessage = this.value.trim();
+        if (userMessage !== '') {
+            addChatbotMessage('You', userMessage);
+            this.value = '';
+            generateChatbotResponse(userMessage);
+        }
     }
 });
 
-// ====================================
-// 3. Smooth Scrolling for Navigation Links
-// ====================================
+function addChatbotMessage(sender, message) {
+    const messageElement = document.createElement('div');
+    messageElement.innerHTML = `<strong>${sender}:</strong> ${message}`;
+    chatbotMessages.appendChild(messageElement);
+    chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+}
 
-document.querySelectorAll('nav .nav-links a').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const section = document.querySelector(this.getAttribute('href'));
-        window.scrollTo({
-            top: section.offsetTop - 80,
-            behavior: 'smooth'
-        });
-    });
-});
-
-// ====================================
-// 4. Connect Wallet Functionality (Placeholder)
-// ====================================
-
-document.getElementById('connect-wallet').addEventListener('click', () => {
-    alert('Wallet connection functionality coming soon!');
-});
-
-// ====================================
-// 5. Buy Now Buttons Functionality
-// ====================================
-
-document.querySelectorAll('#buy-now, #buy-now-2').forEach(button => {
-    button.addEventListener('click', () => {
-        alert('Redirecting to the exchange platform to buy $DUCKY!');
-    });
-});
-
-// ====================================
-// 6. Responsive Navigation Menu (For Mobile)
-// ====================================
-
-const nav = document.querySelector('nav');
-const navLinks = document.querySelector('nav .nav-links');
-const burger = document.createElement('div');
-burger.classList.add('burger');
-burger.innerHTML = '<div></div><div></div><div></div>';
-nav.appendChild(burger);
-
-burger.addEventListener('click', () => {
-    navLinks.classList.toggle('nav-active');
-    burger.classList.toggle('toggle');
-});
-
-// Add styles for mobile menu via JavaScript (since CSS is static)
-const style = document.createElement('style');
-style.innerHTML = `
-    .burger {
-        display: none;
-        cursor: pointer;
-    }
-    .burger div {
-        width: 25px;
-        height: 3px;
-        background-color: #ffffff;
-        margin: 5px;
-        transition: all 0.3s ease;
-    }
-    @media (max-width: 768px) {
-        .burger {
-            display: block;
-        }
-        .nav-links {
-            position: absolute;
-            right: 0;
-            height: 100vh;
-            top: 0;
-            background-color: #151515;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 50%;
-            transform: translateX(100%);
-            transition: transform 0.5s ease-in;
-        }
-        .nav-links li {
-            opacity: 0;
-        }
-        .nav-links.nav-active {
-            transform: translateX(0%);
-        }
-        .nav-links.nav-active li {
-            opacity: 1;
-        }
-        .toggle div:nth-child(1) {
-            transform: rotate(-45deg) translate(-5px, 6px);
-        }
-        .toggle div:nth-child(2) {
-            opacity: 0;
-        }
-        .toggle div:nth-child(3) {
-            transform: rotate(45deg) translate(-5px, -6px);
-        }
-    }
-`;
-document.head.appendChild(style);
-
-// ====================================
-// 7. Load Event for Preloader (Optional)
-// ====================================
-
-window.addEventListener('load', () => {
-    // Hide preloader if implemented
-});
-
+function generateChatbotResponse(userMessage) {
+    const responses = [
+        "Quack! Based on my analysis, this project looks promising!",
+        "Hmm, the waters seem murky. Proceed with caution!",
+        "Our feathers indicate potential for growth!",
+        "The crypto pond is calm; might be a good time to dive in!",
+        "Watch out for sharks! Risk factors are high!",
+        "This could be a golden egg! Let's keep an eye on it!"
+    ];
+    const response = responses[Math.floor(Math.random() * responses.length)];
+    setTimeout(() => {
+        addChatbotMessage('DuckAI', response);
+    }, 1000);
+}
