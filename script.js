@@ -103,9 +103,8 @@ document.querySelectorAll('nav .nav-links a').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
         const section = document.querySelector(this.getAttribute('href'));
-        const offset = document.querySelector('nav').offsetHeight;
         window.scrollTo({
-            top: section.offsetTop - offset,
+            top: section.offsetTop - 80,
             behavior: 'smooth'
         });
     });
@@ -116,7 +115,7 @@ document.querySelectorAll('nav .nav-links a').forEach(anchor => {
 // ====================================
 
 document.getElementById('connect-wallet').addEventListener('click', () => {
-    alert('Wallet connection functionality is not available on GitHub Pages.');
+    alert('Wallet connection functionality coming soon!');
 });
 
 // ====================================
@@ -135,71 +134,74 @@ document.querySelectorAll('#buy-now, #buy-now-2').forEach(button => {
 
 const nav = document.querySelector('nav');
 const navLinks = document.querySelector('nav .nav-links');
-const burger = document.querySelector('.burger');
+const burger = document.createElement('div');
+burger.classList.add('burger');
+burger.innerHTML = '<div></div><div></div><div></div>';
+nav.appendChild(burger);
 
 burger.addEventListener('click', () => {
     navLinks.classList.toggle('nav-active');
     burger.classList.toggle('toggle');
 });
 
-// Burger Animation
-burger.addEventListener('click', () => {
-    burger.classList.toggle('toggle');
-});
-
-// ====================================
-// 7. AI Chatbot Functionality (Simulated)
-// ====================================
-
-const chatbotMessages = document.getElementById('chatbot-messages');
-const chatbotInput = document.getElementById('chatbot-input');
-const chatbotSend = document.getElementById('chatbot-send');
-
-chatbotSend.addEventListener('click', sendMessage);
-chatbotInput.addEventListener('keydown', function(event) {
-    if (event.key === 'Enter') {
-        sendMessage();
+// Add styles for mobile menu via JavaScript (since CSS is static)
+const style = document.createElement('style');
+style.innerHTML = `
+    .burger {
+        display: none;
+        cursor: pointer;
     }
-});
-
-function sendMessage() {
-    const userMessage = chatbotInput.value.trim();
-    if (userMessage !== '') {
-        addChatbotMessage('You', userMessage);
-        chatbotInput.value = '';
-        generateChatbotResponse(userMessage);
+    .burger div {
+        width: 25px;
+        height: 3px;
+        background-color: #ffffff;
+        margin: 5px;
+        transition: all 0.3s ease;
     }
-}
-
-function addChatbotMessage(sender, message) {
-    const messageElement = document.createElement('div');
-    messageElement.classList.add('message');
-    messageElement.innerHTML = `<strong>${sender}:</strong> ${message}`;
-    chatbotMessages.appendChild(messageElement);
-    chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
-}
-
-function generateChatbotResponse(userMessage) {
-    // Simulated AI response
-    const responses = [
-        "Quack! Based on my analysis, this project looks promising!",
-        "Hmm, the waters seem murky. Proceed with caution!",
-        "Our feathers indicate potential for growth!",
-        "The crypto pond is calm; might be a good time to dive in!",
-        "Watch out for sharks! Risk factors are high!",
-        "This could be a golden egg! Let's keep an eye on it!"
-    ];
-    const response = responses[Math.floor(Math.random() * responses.length)];
-    setTimeout(() => {
-        addChatbotMessage('DuckAI', response);
-    }, 1000);
-}
+    @media (max-width: 768px) {
+        .burger {
+            display: block;
+        }
+        .nav-links {
+            position: absolute;
+            right: 0;
+            height: 100vh;
+            top: 0;
+            background-color: #151515;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 50%;
+            transform: translateX(100%);
+            transition: transform 0.5s ease-in;
+        }
+        .nav-links li {
+            opacity: 0;
+        }
+        .nav-links.nav-active {
+            transform: translateX(0%);
+        }
+        .nav-links.nav-active li {
+            opacity: 1;
+        }
+        .toggle div:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+        .toggle div:nth-child(2) {
+            opacity: 0;
+        }
+        .toggle div:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+    }
+`;
+document.head.appendChild(style);
 
 // ====================================
-// 8. AOS Initialization
+// 7. Load Event for Preloader (Optional)
 // ====================================
 
-AOS.init({
-    duration: 1000,
-    once: true
+window.addEventListener('load', () => {
+    // Hide preloader if implemented
 });
+
