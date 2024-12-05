@@ -1,5 +1,5 @@
 // ====================================
-// 1. PumpFun Crypto Analyzer with Ducky Enhancements
+// 1. PumpFun Crypto Analyzer with DonaldAI Enhancements
 // ====================================
 
 // Elements
@@ -9,32 +9,56 @@ const consoleOutput = document.getElementById('console-output');
 const visualizationContainer = document.getElementById('visualization-container');
 const neuralCanvas = document.getElementById('neural-network-canvas');
 const progressBar = document.getElementById('progress-bar');
-const chatbotContainer = document.getElementById('chatbot-container');
+const progressSteps = document.querySelectorAll('.step');
 const downloadContainer = document.getElementById('download-container');
+const errorMessage = document.getElementById('error-message');
+const analysisReport = document.getElementById('analysis-report');
 
-// Ducky Analysis Template
-function createDetailedAnalysis() {
+// Chart instances
+let roiChart, riskChart;
+
+// DonaldAI Analysis Template
+function createDetailedAnalysis(link) {
     const riskScore = (Math.random() * 100).toFixed(2);
     const predictedROI = (Math.random() * 200 - 50).toFixed(2);
     const confidenceInterval = (Math.random() * 10 + 90).toFixed(2);
 
-    return `
-🦆 DuckAI's Quacktastic Analysis Report 🦆
+    const projectName = extractProjectName(link);
 
-🐤 Risk Score: ${riskScore}/100
-💰 Predicted ROI: ${predictedROI}%
-🔒 Confidence Level: ${confidenceInterval}%
+    return {
+        text: `
+🦆 **DonaldAI's Quacktastic Analysis Report** 🦆
+
+🐤 **Project:** ${projectName}
+🐤 **Risk Score:** ${riskScore}/100
+💰 **Predicted ROI:** ${predictedROI}%
+🔒 **Confidence Level:** ${confidenceInterval}%
 
 🦆 **Key Findings:**
-1. Market volatility is ${riskScore > 50 ? 'high 🌀' : 'low 🌊'}, affecting potential returns.
-2. Sentiment analysis indicates a ${predictedROI > 0 ? 'positive 📈' : 'negative 📉'} outlook.
-3. DuckAI's algorithms quack a ${confidenceInterval}% confidence in these results.
+1. **Market Volatility:** ${riskScore > 50 ? 'High 🌀' : 'Low 🌊'} affecting potential returns.
+2. **Sentiment Analysis:** ${predictedROI > 0 ? 'Positive 📈' : 'Negative 📉'} outlook.
+3. **Algorithm Confidence:** ${confidenceInterval}% confidence in these results.
 
 🦆 **Recommendations:**
 ${riskScore > 50 ? 'Proceed with caution. Swim carefully in these waters. 🦆' : 'The waters are calm. This could be a golden egg! 🥚'}
 
-*This report was lovingly crafted by DuckAI's AI feathers and webbed feet.*
-`;
+*This report was lovingly crafted by DonaldAI's AI feathers and webbed feet.*
+        `,
+        data: {
+            roi: predictedROI,
+            risk: riskScore
+        }
+    };
+}
+
+// Function to extract project name from the link
+function extractProjectName(link) {
+    try {
+        const url = new URL(link);
+        return url.pathname.replace('/', '') || 'Unknown Project';
+    } catch {
+        return 'Unknown Project';
+    }
 }
 
 // Event Listener for Form Submission
@@ -42,24 +66,45 @@ linkForm.addEventListener('submit', (event) => {
     event.preventDefault();
     const link = pumpfunLinkInput.value.trim();
     if (link === '') {
-        alert('Please enter a PumpFun link.');
+        displayError('Please enter a PumpFun link.');
         return;
     }
+    if (!validatePumpFunLink(link)) {
+        displayError('Invalid PumpFun link. Please enter a valid link from https://pump.fun/.');
+        return;
+    }
+    errorMessage.classList.add('hidden');
     startAnalysis(link);
 });
+
+// Function to display error messages
+function displayError(message) {
+    errorMessage.textContent = message;
+    errorMessage.classList.remove('hidden');
+}
+
+// Function to validate that the link is a PumpFun link
+function validatePumpFunLink(link) {
+    try {
+        const url = new URL(link);
+        return url.hostname === 'pump.fun' || url.hostname.endsWith('.pump.fun');
+    } catch (e) {
+        return false;
+    }
+}
 
 // Start Analysis Function
 function startAnalysis(link) {
     consoleOutput.innerHTML = '';
     visualizationContainer.classList.remove('hidden');
+    analysisReport.classList.add('hidden');
     animateNeuralNetwork();
     animateProgressBar();
-    chatbotContainer.classList.add('hidden');
     downloadContainer.innerHTML = ''; // Clear previous download button
 
     const loadingMessages = [
         `🌐 Connecting to PumpFun pond...`,
-        `🦆 DuckAI is waddling through ${link}...`,
+        `🦆 DonaldAI is waddling through ${link}...`,
         `🔍 Diving deep into the data lake...`,
         `💡 Analyzing with AI quacks and neural networks...`,
         `📝 Preparing your quacktastic report...`
@@ -67,17 +112,29 @@ function startAnalysis(link) {
 
     function displayNextMessage(i) {
         if (i < loadingMessages.length) {
+            updateProgressStep(i);
             displayConsoleMessage(loadingMessages[i] + '\n', () => {
                 displayNextMessage(i + 1);
             });
         } else {
             setTimeout(() => {
-                generateAnalysis();
+                generateAnalysis(link);
             }, 1000);
         }
     }
 
     displayNextMessage(0);
+}
+
+// Function to update progress steps
+function updateProgressStep(index) {
+    progressSteps.forEach((step, i) => {
+        if (i <= index) {
+            step.classList.add('active');
+        } else {
+            step.classList.remove('active');
+        }
+    });
 }
 
 // Typing Effect for Console Messages
@@ -95,33 +152,92 @@ function displayConsoleMessage(message, callback) {
 }
 
 // Generate Analysis Function
-function generateAnalysis() {
-    consoleOutput.innerHTML += '\n🦆 Analysis complete! 🦆\n';
-    const analysis = createDetailedAnalysis();
-    consoleOutput.innerHTML += analysis + '\n';
+function generateAnalysis(link) {
+    consoleOutput.innerHTML += '\n🦆 **Analysis Complete! 🦆**\n';
+    const analysis = createDetailedAnalysis(link);
+    consoleOutput.innerHTML += analysis.text + '\n';
 
     // Stop animations
     stopNeuralNetworkAnimation();
     stopProgressBar();
 
+    // Show analysis report with charts
+    displayAnalysisReport(analysis);
+
     // Create a download button for the analysis
     const downloadBtn = document.createElement('button');
     downloadBtn.id = 'download-btn';
-    downloadBtn.textContent = 'Download Your Duckport';
+    downloadBtn.textContent = 'Download Your Donaldport';
     downloadBtn.addEventListener('click', () => {
-        downloadAnalysis(analysis);
+        downloadAnalysis(analysis.text);
     });
     downloadContainer.appendChild(downloadBtn);
+}
 
-    // Show chatbot
-    chatbotContainer.classList.remove('hidden');
+// Function to display the analysis report with charts
+function displayAnalysisReport(analysis) {
+    analysisReport.classList.remove('hidden');
+    document.getElementById('analysis-text').textContent = analysis.text;
+
+    // Prepare data for ROI Chart
+    const roiCtx = document.getElementById('roi-chart').getContext('2d');
+    roiChart = new Chart(roiCtx, {
+        type: 'bar',
+        data: {
+            labels: ['Predicted ROI (%)'],
+            datasets: [{
+                label: 'ROI',
+                data: [analysis.data.roi],
+                backgroundColor: ['#ff9800'],
+                borderColor: ['#e68900'],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            },
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Predicted Return on Investment'
+                }
+            }
+        }
+    });
+
+    // Prepare data for Risk Chart
+    const riskCtx = document.getElementById('risk-chart').getContext('2d');
+    riskChart = new Chart(riskCtx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Risk Score', 'Remaining'],
+            datasets: [{
+                data: [analysis.data.risk, 100 - analysis.data.risk],
+                backgroundColor: ['#d32f2f', '#b0bec5'],
+                hoverOffset: 4
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Risk Assessment'
+                }
+            }
+        }
+    });
 }
 
 // Download Analysis Function
 function downloadAnalysis(analysisText) {
     const blob = new Blob([analysisText], { type: 'text/plain' });
     const link = document.createElement('a');
-    link.download = 'DuckAI_Analysis.txt';
+    link.download = 'DonaldAI_Analysis.txt';
     link.href = window.URL.createObjectURL(blob);
     link.click();
 }
@@ -228,41 +344,9 @@ function stopProgressBar() {
 }
 
 // ====================================
-// 4. Chatbot Functionality
+// 4. Initialize Particles.js for Background
 // ====================================
 
-const chatbotMessages = document.getElementById('chatbot-messages');
-const chatbotInput = document.getElementById('chatbot-input');
-
-chatbotInput.addEventListener('keydown', function(event) {
-    if (event.key === 'Enter') {
-        const userMessage = this.value.trim();
-        if (userMessage !== '') {
-            addChatbotMessage('You', userMessage);
-            this.value = '';
-            generateChatbotResponse(userMessage);
-        }
-    }
+particlesJS.load('particles-js', 'particles.json', function() {
+    console.log('Particles.js config loaded');
 });
-
-function addChatbotMessage(sender, message) {
-    const messageElement = document.createElement('div');
-    messageElement.innerHTML = `<strong>${sender}:</strong> ${message}`;
-    chatbotMessages.appendChild(messageElement);
-    chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
-}
-
-function generateChatbotResponse(userMessage) {
-    const responses = [
-        "Quack! Based on my analysis, this project looks promising!",
-        "Hmm, the waters seem murky. Proceed with caution!",
-        "Our feathers indicate potential for growth!",
-        "The crypto pond is calm; might be a good time to dive in!",
-        "Watch out for sharks! Risk factors are high!",
-        "This could be a golden egg! Let's keep an eye on it!"
-    ];
-    const response = responses[Math.floor(Math.random() * responses.length)];
-    setTimeout(() => {
-        addChatbotMessage('DuckAI', response);
-    }, 1000);
-}
